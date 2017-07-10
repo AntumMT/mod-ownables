@@ -1,0 +1,1 @@
+Registers entities to be owned by players.
