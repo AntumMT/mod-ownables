@@ -1,2 +1,5 @@
-# mod-ownedmob
-Plans for a Minetest mod that registers entities to be owned by players
+# ***Owned Mobile*** mod for [Minetest][]
+
+Plans for a Minetest mod that registers entities to be owned by players.
+
+[Minetest]: http://www.minetest.net/
