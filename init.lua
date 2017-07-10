@@ -16,6 +16,7 @@ ownedmob.debug = minetest.settings:get_bool('enable_debug') -- Default disabled
 
 local scripts = {
 	'register',
+	'chat',
 }
 
 for index, script in ipairs(scripts) do
