@@ -103,6 +103,22 @@ function ownedmob.list_entities(player)
 end
 
 
+-- Retrieves entity definition by name
+function ownedmob.get_def(name)
+	local def = nil
+	
+	if contains(registered_entities, name) then
+		def = minetest.registered_entities[name]
+	end
+	
+	if not def then
+		ownedmob.log('warning', 'Attempt to retrieve definition for unregistered ownable entity "' .. name .. '"')
+	end
+	
+	return def
+end
+
+
 --[[ Registers an alias for a given name
   @return
       boolean: 'true' if alias successfully registered
