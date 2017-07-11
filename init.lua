@@ -27,6 +27,7 @@ end
 
 local scripts = {
 	'register',
+	'lasso',
 	'chat',
 }
 
