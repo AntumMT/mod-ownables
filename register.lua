@@ -116,7 +116,7 @@ function ownedmob.register(old_name)
 		table.insert(registered_entities, minetest.registered_entities[new_name])
 		ownedmob.register_alias(old_name, new_name)
 		
-		local registered = contains(minetest.registered_entities, new_name)
+		local registered = contains(minetest.registered_entities, new_name) and not contains(minetest.registered_entities, old_name)
 		
 		if registered then
 			ownedmob.log('action', 'Registered ownable mob "' .. new_name .. '"')
