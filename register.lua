@@ -11,6 +11,7 @@
 -- *** TABLES ***
 
 local registered_entities = {}
+local registered_aliases = {}
 
 
 -- *** LOCAL FUNCTIONS ***
@@ -64,6 +65,22 @@ end
 
 -- *** GLOBAL FUNCTIONS ***
 
+
+--[[ Registers an alias for a given name
+  @return
+      boolean: 'true' if alias successfully registered
+]]
+function ownedmob.register_alias(alias, target)
+	if not contains(registered_aliases[target], alias) then
+		table.insert(registered_aliases[target], alias)
+	else
+		minetest.log('warning', '[' .. ownedmob.mobname .. '] Attempted to re-register alias "' .. alias .. '" for "' .. target .. '"')
+		return false
+	end
+	
+	return contains(registered_aliases[target], alias)
+end
+
 -- Registers an entity type as an ownable entity
 function ownedmob.register(old_name)
 	local entity_def = minetest.registered_entities[old_name]
@@ -80,6 +97,7 @@ function ownedmob.register(old_name)
 		minetest.register_entity(new_name, entity_def)
 		
 		table.insert(registered_entities, minetest.registered_entities[new_name])
+		ownedmob.register_alias(old_name, new_name)
 		
 		local registered = contains(minetest.registered_entities, new_name)
 		
