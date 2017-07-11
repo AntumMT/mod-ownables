@@ -40,6 +40,16 @@ local function contains(tbl, value)
 end
 
 
+-- Checks if a name is already registered as an alias
+local function is_alias(name)
+	for i, entity_name in ipairs(registered_aliases) do
+		if contains(registered_aliases[entity_name], name) then return true end
+	end
+	
+	return false
+end
+
+
 -- Converts entity name to table definition
 local function to_def(entity)
 	if type(entity) ~= 'table' then
