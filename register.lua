@@ -192,6 +192,7 @@ end
 
 
 --[[ Adds a new owner to entity
+  FIXME: Needs to work on entity instances
 
   @return
     boolean: 'true' if owner was added
@@ -208,7 +209,9 @@ function ownmob.add_owner(entity, owner)
 end
 
 
--- Removes an owner from entity
+--[[ Removes an owner from entity
+  FIXME: Needs to work on entity instances
+]]
 function ownmob.remove_owner(entity, owner)
 	entity = to_def(entity)
 	if entity and contains(entity.owner, owner) then
