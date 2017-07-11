@@ -87,6 +87,22 @@ function ownedmob.get_registered_entities()
 end
 
 
+-- Lists registered ownable entities
+function ownedmob.list_entities(player)
+	if player == nil then
+		ownedmob.log('info', 'Ownable entitites (total: ' .. #registered_entities .. '):')
+		for i, name in ipairs(registered_entities) do
+			ownedmob.log('info', '\t- ' .. name)
+		end
+		
+		return
+	end
+	
+	-- FIXME: Send message to player
+	ownedmob.log('warning', 'Called "ownedmob.list" with "player" parameter but code is unfinished')
+end
+
+
 --[[ Registers an alias for a given name
   @return
       boolean: 'true' if alias successfully registered
