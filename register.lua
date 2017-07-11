@@ -127,10 +127,16 @@ function ownedmob.register(old_name)
 		-- Extract entity's base name & add new prefix
 		local new_name = ownedmob.modname .. ':' .. string.split(old_name, ':')[2]
 		
+		local register_name = new_name
+		-- For registering from other mods
+		if minetest.get_current_modname ~= ownedmob.modname then
+			register_name = ':' .. register_name
+		end
+		
 		-- Remove old entity & register new ownable one
 		-- FIXME: How to unregister/override an entity type
 		--minetest.unregister_entity(old_name)
-		minetest.register_entity(new_name, entity_def)
+		minetest.register_entity(register_name, entity_def)
 		
 		table.insert(registered_entities, minetest.registered_entities[new_name])
 		ownedmob.register_alias(old_name, new_name)
