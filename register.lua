@@ -222,3 +222,14 @@ function ownmob.remove_owner(entity, owner)
 	
 	return false
 end
+
+
+-- Checks if entity has owner(s)
+function ownmob.has_owner(entity)
+	if entity and entity.owner ~= nil then
+		if type(entity.owner) == 'string' then return true end
+		if type(entity.owner) == 'table' and #entity.owner then return true end
+	end
+	
+	return false
+end
