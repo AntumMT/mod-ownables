@@ -88,7 +88,14 @@ function ownedmob.register_alias(alias, target)
 		return false
 	end
 	
-	return contains(registered_aliases[target], alias)
+	local registered = contains(registered_aliases[target], alias)
+	if registered then
+		ownedmob.log('debug', 'Registered alias "' .. alias .. '" for "' .. target .. '"')
+	else
+		ownedmob.log('error', 'Could not register alias "' .. alias .. '" for "' .. target .. '"')
+	end
+	
+	return registered
 end
 
 -- Registers an entity type as an ownable entity
