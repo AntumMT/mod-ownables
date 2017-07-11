@@ -13,6 +13,15 @@ ownedmob.modname = minetest.get_current_modname()
 ownedmob.modpath = minetest.get_modpath(ownedmob.modname)
 ownedmob.debug = minetest.settings:get_bool('enable_debug') -- Default disabled
 
+function ownedmob.log(level, msg)
+	if level == 'debug' then
+		msg = 'DEBUG: ' .. msg
+		level = 'verbose'
+	end
+	
+	minetest.log(level, '[' .. ownedmob.modname .. '] ' .. msg)
+end
+
 
 local scripts = {
 	'register',
