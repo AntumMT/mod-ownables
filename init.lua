@@ -15,6 +15,8 @@ ownedmob.debug = minetest.settings:get_bool('enable_debug') -- Default disabled
 
 function ownedmob.log(level, msg)
 	if level == 'debug' then
+		if not ownedmob.debug then return end
+		
 		msg = 'DEBUG: ' .. msg
 		level = 'verbose'
 	end
