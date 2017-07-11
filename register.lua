@@ -233,3 +233,9 @@ function ownmob.has_owner(entity)
 	
 	return false
 end
+
+
+-- Checks if an entity can be player-owned
+function ownmob.is_ownable(name)
+	return contains(registered_entities, name)
+end
