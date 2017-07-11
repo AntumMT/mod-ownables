@@ -100,7 +100,7 @@ function ownedmob.register(old_name)
 		entity_def.owner = {}
 		
 		-- Extract entity's base name & add new prefix
-		local new_name = ownedmob.modname .. ':' .. split(old_name, ':')[2]
+		local new_name = ownedmob.modname .. ':' .. string.split(old_name, ':')[2]
 		
 		-- Remove old entity & register new ownable one
 		minetest.unregister_entity(old_name)
