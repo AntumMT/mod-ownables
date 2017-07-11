@@ -138,7 +138,7 @@ function ownedmob.register(old_name)
 		--minetest.unregister_entity(old_name)
 		minetest.register_entity(register_name, entity_def)
 		
-		table.insert(registered_entities, minetest.registered_entities[new_name])
+		table.insert(registered_entities, new_name)
 		ownedmob.register_alias(old_name, new_name)
 		
 		local registered = contains(minetest.registered_entities, new_name) and not contains(minetest.registered_entities, old_name)
