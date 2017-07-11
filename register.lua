@@ -8,6 +8,11 @@
 --]]
 
 
+-- *** TABLES ***
+
+local registered_entities = {}
+
+
 -- *** LOCAL FUNCTIONS ***
 
 -- Retrieves table index
@@ -73,7 +78,21 @@ function ownedmob.register(old_name)
 		-- Remove old entity & register new ownable one
 		minetest.unregister_entity(old_name)
 		minetest.register_entity(new_name, entity_def)
+		
+		table.insert(registered_entities, minetest.registered_entities[new_name])
+		
+		local registered = contains(minetest.registered_entities, new_name)
+		
+		if registered then
+			ownedmob.log('action', 'Registered ownable mob "' .. new_name .. '"')
+		else
+			ownedmob.log('warning', 'Could not register ownable mob "' .. new_name .. '"')
+		end
+		
+		return registered
 	end
+	
+	return false
 end
 
 
