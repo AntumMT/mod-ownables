@@ -11,7 +11,6 @@
 -- *** TABLES ***
 
 local registered_entities = {}
-local registered_aliases = {}
 
 
 -- *** LOCAL FUNCTIONS ***
@@ -119,33 +118,6 @@ function ownmob.get_def(name)
 end
 
 
---[[ Registers an alias for a given name
-  @return
-      boolean: 'true' if alias successfully registered
-]]
-function ownmob.register_alias(alias, target)
-	if not contains(registered_aliases, target) then
-		registered_aliases[target] = {}
-	end
-	
-	if not contains(registered_aliases[target], alias) then
-		table.insert(registered_aliases[target], alias)
-	else
-		ownmob.log('warning', 'Attempted to re-register alias "' .. alias '" for "' .. target .. '"')
-		return false
-	end
-	
-	local registered = contains(registered_aliases[target], alias)
-	if registered then
-		ownmob.log('debug', 'Registered alias "' .. alias .. '" for "' .. target .. '"')
-	else
-		ownmob.log('error', 'Could not register alias "' .. alias .. '" for "' .. target .. '"')
-	end
-	
-	return registered
-end
-
-
 -- Registers an entity type as an ownable entity
 function ownmob.register(old_name)
 	ownmob.log('debug', 'Registering "' .. old_name .. '" as ownable entity ...')
@@ -156,32 +128,14 @@ function ownmob.register(old_name)
 		-- Add 'owner' attribute
 		entity_def.owner = {}
 		
-		-- Extract entity's base name & add new prefix
-		local new_name = ownmob.modname .. ':' .. string.split(old_name, ':')[2]
+		table.insert(registered_entities, old_name)
 		
-		local register_name = new_name
-		-- For registering from other mods
-		if minetest.get_current_modname ~= ownmob.modname then
-			register_name = ':' .. register_name
-		end
-		
-		-- Remove old entity & register new ownable one
-		-- FIXME: How to unregister/override an entity type
-		--minetest.unregister_entity(old_name)
-		minetest.register_entity(register_name, entity_def)
-		
-		table.insert(registered_entities, new_name)
-		
-		-- FIXME: Check minetest.registered_entities that 'old_name' is removed
-		local registered = minetest.registered_entities[new_name] ~= nil -- and not minetest.registered_entities[old_name]
+		local registered = contains(registered_entities, old_name)
 		
 		if registered then
-			-- Register removed entity as alias of new one
-			ownmob.register_alias(old_name, new_name)
-			
-			ownmob.log('verbose', 'Re-registered "' .. old_name .. '" as ownable mob "' .. new_name .. '"')
+			ownmob.log('verbose', 'Registered "' .. old_name .. '" as ownable')
 		else
-			ownmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
+			ownmob.log('error', 'Could not register "' .. old_name .. '" as ownable')
 		end
 		
 		return registered
