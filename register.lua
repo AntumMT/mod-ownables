@@ -139,12 +139,14 @@ function ownedmob.register(old_name)
 		minetest.register_entity(register_name, entity_def)
 		
 		table.insert(registered_entities, new_name)
-		ownedmob.register_alias(old_name, new_name)
 		
 		-- FIXME: Check minetest.registered_entities that 'old_name' is removed
 		local registered = minetest.registered_entities[new_name] ~= nil -- and not minetest.registered_entities[old_name]
 		
 		if registered then
+			-- Register removed entity as alias of new one
+			ownedmob.register_alias(old_name, new_name)
+			
 			ownedmob.log('verbose', 'Re-registered "' .. old_name .. '" as ownable mob "' .. new_name .. '"')
 		else
 			ownedmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
