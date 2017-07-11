@@ -112,7 +112,8 @@ function ownedmob.register(old_name)
 		local new_name = ownedmob.modname .. ':' .. string.split(old_name, ':')[2]
 		
 		-- Remove old entity & register new ownable one
-		minetest.unregister_entity(old_name)
+		-- FIXME: How to unregister/override an entity type
+		--minetest.unregister_entity(old_name)
 		minetest.register_entity(new_name, entity_def)
 		
 		table.insert(registered_entities, minetest.registered_entities[new_name])
