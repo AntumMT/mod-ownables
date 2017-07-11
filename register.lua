@@ -61,18 +61,18 @@ end
 
 -- Registers an entity type as an ownable entity
 function ownedmob.register(old_name)
-	local entity = minetest.registered_entities[old_name]
+	local entity_def = minetest.registered_entities[old_name]
 	
-	if entity then
+	if entity_def then
 		-- Add 'owner' attribute
-		entity.owner = {}
+		entity_def.owner = {}
 		
 		-- Extract entity's base name & add new prefix
 		local new_name = ownedmob.modname .. ':' .. split(old_name, ':')[2]
 		
 		-- Remove old entity & register new ownable one
 		minetest.unregister_entity(old_name)
-		minetest.register_entity(new_name, entity)
+		minetest.register_entity(new_name, entity_def)
 	end
 end
 
