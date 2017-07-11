@@ -1,4 +1,4 @@
-# ***Owned Mobile*** mod for [Minetest][]
+# ***Owned Mobile*** (ownmob) mod for [Minetest][]
 
 Plans for a Minetest mod that registers entities to be owned by players.
 

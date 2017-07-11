@@ -8,20 +8,20 @@
 --]]
 
 
-ownedmob = {}
-ownedmob.modname = minetest.get_current_modname()
-ownedmob.modpath = minetest.get_modpath(ownedmob.modname)
-ownedmob.debug = minetest.settings:get_bool('enable_debug') -- Default disabled
+ownmob = {}
+ownmob.modname = minetest.get_current_modname()
+ownmob.modpath = minetest.get_modpath(ownmob.modname)
+ownmob.debug = minetest.settings:get_bool('enable_debug') -- Default disabled
 
-function ownedmob.log(level, msg)
+function ownmob.log(level, msg)
 	if level == 'debug' then
-		if not ownedmob.debug then return end
+		if not ownmob.debug then return end
 		
 		msg = 'DEBUG: ' .. msg
 		level = 'verbose'
 	end
 	
-	minetest.log(level, '[' .. ownedmob.modname .. '] ' .. msg)
+	minetest.log(level, '[' .. ownmob.modname .. '] ' .. msg)
 end
 
 
@@ -31,5 +31,5 @@ local scripts = {
 }
 
 for index, script in ipairs(scripts) do
-	dofile(ownedmob.modpath .. '/' .. script .. '.lua')
+	dofile(ownmob.modpath .. '/' .. script .. '.lua')
 end

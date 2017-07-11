@@ -8,4 +8,4 @@
 --]]
 
 
--- Chat commands for 'ownedmob' mod
+-- Chat commands for 'ownmob' mod

@@ -76,35 +76,35 @@ end
 -- *** GLOBAL FUNCTIONS ***
 
 -- Retrieves table of registered aliases
-function ownedmob.get_registered_aliases()
+function ownmob.get_registered_aliases()
 	return registered_aliases
 end
 
 
 -- Retrieves table of registered entities
-function ownedmob.get_registered_entities()
+function ownmob.get_registered_entities()
 	return registered_entities
 end
 
 
 -- Lists registered ownable entities
-function ownedmob.list_entities(player)
+function ownmob.list_entities(player)
 	if player == nil then
-		ownedmob.log('info', 'Ownable entitites (total: ' .. #registered_entities .. '):')
+		ownmob.log('info', 'Ownable entitites (total: ' .. #registered_entities .. '):')
 		for i, name in ipairs(registered_entities) do
-			ownedmob.log('info', '\t- ' .. name)
+			ownmob.log('info', '\t- ' .. name)
 		end
 		
 		return
 	end
 	
 	-- FIXME: Send message to player
-	ownedmob.log('warning', 'Called "ownedmob.list" with "player" parameter but code is unfinished')
+	ownmob.log('warning', 'Called "ownmob.list" with "player" parameter but code is unfinished')
 end
 
 
 -- Retrieves entity definition by name
-function ownedmob.get_def(name)
+function ownmob.get_def(name)
 	local def = nil
 	
 	if contains(registered_entities, name) then
@@ -112,7 +112,7 @@ function ownedmob.get_def(name)
 	end
 	
 	if not def then
-		ownedmob.log('warning', 'Attempt to retrieve definition for unregistered ownable entity "' .. name .. '"')
+		ownmob.log('warning', 'Attempt to retrieve definition for unregistered ownable entity "' .. name .. '"')
 	end
 	
 	return def
@@ -123,7 +123,7 @@ end
   @return
       boolean: 'true' if alias successfully registered
 ]]
-function ownedmob.register_alias(alias, target)
+function ownmob.register_alias(alias, target)
 	if not contains(registered_aliases, target) then
 		registered_aliases[target] = {}
 	end
@@ -131,15 +131,15 @@ function ownedmob.register_alias(alias, target)
 	if not contains(registered_aliases[target], alias) then
 		table.insert(registered_aliases[target], alias)
 	else
-		ownedmob.log('warning', 'Attempted to re-register alias "' .. alias '" for "' .. target .. '"')
+		ownmob.log('warning', 'Attempted to re-register alias "' .. alias '" for "' .. target .. '"')
 		return false
 	end
 	
 	local registered = contains(registered_aliases[target], alias)
 	if registered then
-		ownedmob.log('debug', 'Registered alias "' .. alias .. '" for "' .. target .. '"')
+		ownmob.log('debug', 'Registered alias "' .. alias .. '" for "' .. target .. '"')
 	else
-		ownedmob.log('error', 'Could not register alias "' .. alias .. '" for "' .. target .. '"')
+		ownmob.log('error', 'Could not register alias "' .. alias .. '" for "' .. target .. '"')
 	end
 	
 	return registered
@@ -147,8 +147,8 @@ end
 
 
 -- Registers an entity type as an ownable entity
-function ownedmob.register(old_name)
-	ownedmob.log('debug', 'Registering "' .. old_name .. '" as ownable entity ...')
+function ownmob.register(old_name)
+	ownmob.log('debug', 'Registering "' .. old_name .. '" as ownable entity ...')
 	
 	local entity_def = minetest.registered_entities[old_name]
 	
@@ -157,11 +157,11 @@ function ownedmob.register(old_name)
 		entity_def.owner = {}
 		
 		-- Extract entity's base name & add new prefix
-		local new_name = ownedmob.modname .. ':' .. string.split(old_name, ':')[2]
+		local new_name = ownmob.modname .. ':' .. string.split(old_name, ':')[2]
 		
 		local register_name = new_name
 		-- For registering from other mods
-		if minetest.get_current_modname ~= ownedmob.modname then
+		if minetest.get_current_modname ~= ownmob.modname then
 			register_name = ':' .. register_name
 		end
 		
@@ -177,11 +177,11 @@ function ownedmob.register(old_name)
 		
 		if registered then
 			-- Register removed entity as alias of new one
-			ownedmob.register_alias(old_name, new_name)
+			ownmob.register_alias(old_name, new_name)
 			
-			ownedmob.log('verbose', 'Re-registered "' .. old_name .. '" as ownable mob "' .. new_name .. '"')
+			ownmob.log('verbose', 'Re-registered "' .. old_name .. '" as ownable mob "' .. new_name .. '"')
 		else
-			ownedmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
+			ownmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
 		end
 		
 		return registered
@@ -196,7 +196,7 @@ end
   @return
     boolean: 'true' if owner was added
 ]]
-function ownedmob.add_owner(entity, owner)
+function ownmob.add_owner(entity, owner)
 	entity = to_def(entity)
 	if entity and not contains(entity.owner, owner) then
 		table.insert(entity.owner, owner)
@@ -209,7 +209,7 @@ end
 
 
 -- Removes an owner from entity
-function ownedmob.remove_owner(entity, owner)
+function ownmob.remove_owner(entity, owner)
 	entity = to_def(entity)
 	if entity and contains(entity.owner, owner) then
 		table.remove(entity.owner, get_index(entity.owner, owner))
