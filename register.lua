@@ -121,7 +121,7 @@ function ownedmob.register(old_name)
 		if registered then
 			ownedmob.log('action', 'Registered ownable mob "' .. new_name .. '"')
 		else
-			ownedmob.log('warning', 'Could not register ownable mob "' .. new_name .. '"')
+			ownedmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
 		end
 		
 		return registered
