@@ -92,6 +92,10 @@ end
       boolean: 'true' if alias successfully registered
 ]]
 function ownedmob.register_alias(alias, target)
+	if not contains(registered_aliases, target) then
+		registered_aliases[target] = {}
+	end
+	
 	if not contains(registered_aliases[target], alias) then
 		table.insert(registered_aliases[target], alias)
 	else
@@ -108,6 +112,7 @@ function ownedmob.register_alias(alias, target)
 	
 	return registered
 end
+
 
 -- Registers an entity type as an ownable entity
 function ownedmob.register(old_name)
