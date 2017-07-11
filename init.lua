@@ -29,5 +29,5 @@ local scripts = {
 }
 
 for index, script in ipairs(scripts) do
-	dofile(ownedmob.modpath .. '/ ' .. script .. '.lua')
+	dofile(ownedmob.modpath .. '/' .. script .. '.lua')
 end
