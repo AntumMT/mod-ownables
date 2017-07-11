@@ -100,6 +100,8 @@ end
 
 -- Registers an entity type as an ownable entity
 function ownedmob.register(old_name)
+	ownedmob.log('debug', 'Registering "' .. old_name .. '" as ownable entity ...')
+	
 	local entity_def = minetest.registered_entities[old_name]
 	
 	if entity_def then
@@ -119,7 +121,7 @@ function ownedmob.register(old_name)
 		local registered = contains(minetest.registered_entities, new_name) and not contains(minetest.registered_entities, old_name)
 		
 		if registered then
-			ownedmob.log('verbose', 'Registered ownable mob "' .. new_name .. '"')
+			ownedmob.log('verbose', 'Re-registered "' .. old_name .. '" as ownable mob "' .. new_name .. '"')
 		else
 			ownedmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
 		end
