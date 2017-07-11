@@ -84,7 +84,7 @@ function ownedmob.register_alias(alias, target)
 	if not contains(registered_aliases[target], alias) then
 		table.insert(registered_aliases[target], alias)
 	else
-		minetest.log('warning', '[' .. ownedmob.mobname .. '] Attempted to re-register alias "' .. alias .. '" for "' .. target .. '"')
+		ownedmob.log('warning', 'Attempted to re-register alias "' .. alias '" for "' .. target .. '"')
 		return false
 	end
 	
