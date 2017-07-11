@@ -119,7 +119,7 @@ function ownedmob.register(old_name)
 		local registered = contains(minetest.registered_entities, new_name) and not contains(minetest.registered_entities, old_name)
 		
 		if registered then
-			ownedmob.log('action', 'Registered ownable mob "' .. new_name .. '"')
+			ownedmob.log('verbose', 'Registered ownable mob "' .. new_name .. '"')
 		else
 			ownedmob.log('error', 'Could not register ownable mob "' .. new_name .. '"')
 		end
