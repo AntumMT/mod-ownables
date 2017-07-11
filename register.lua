@@ -75,6 +75,17 @@ end
 
 -- *** GLOBAL FUNCTIONS ***
 
+-- Retrieves table of registered aliases
+function ownedmob.get_registered_aliases()
+	return registered_aliases
+end
+
+
+-- Retrieves table of registered entities
+function ownedmob.get_registered_entities()
+	return registered_entities
+end
+
 
 --[[ Registers an alias for a given name
   @return
