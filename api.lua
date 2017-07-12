@@ -8,6 +8,9 @@
 --]]
 
 
+local worldpath = core.get_worldpath()
+
+
 -- Spawns an entity & writes meta data to world directory
 local function spawn(entity)
 end
