@@ -26,6 +26,7 @@ end
 
 
 local scripts = {
+	'api',
 	'register',
 	'lasso',
 	'chat',
