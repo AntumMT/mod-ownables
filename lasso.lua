@@ -8,6 +8,9 @@
 --]]
 
 
+-- TODO: Override lassos from other mods
+
+
 local function is_entity(name)
 	return minetest.registered_entities[name] ~= nil
 end
