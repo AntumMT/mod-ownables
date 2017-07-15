@@ -9,6 +9,7 @@
 
 
 local worldpath = core.get_worldpath()
+local ownedpath = worldpath '/owned'
 
 
 -- Spawns an entity & writes meta data to world directory
