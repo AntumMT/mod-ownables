@@ -18,20 +18,21 @@ minetest.register_craftitem(ownmob.modname .. ':lasso', {
 	description = 'Lasso',
 	inventory_image = 'ownmob_lasso.png',
 	stack_max = 1,
-	on_place = function(itemstack, placer, pointed_thing)
+	on_punch = function(itemstack, placer, pointed_thing)
 		if pointed_thing then
 			-- DEBUG:
 			--ownmob.log('action', 'Lasso pointing at "' .. pointed_thing.name .. '"')
 			
-			if pointed_thing.name and is_entity(pointed_thing.name) then
+			if pointed_thing.type == 'object' then
 				-- DEBUG:
-				ownmob.log('action', '\t"' .. tostring(pointed_thing.name) .. '" is an entity')
+				ownmob.log('action', '\t"' .. pointed_thing.type .. '" is an entity')
 			else
 				-- DEBUG:
-				ownmob.log('action', '\t"' .. tostring(pointed_thing.name) .. '" is not an entity')
+				ownmob.log('action', '\t"' .. pointed_thing.type .. '" is not an entity')
 			end
 		end
-	end
+	end,
+	on_place = on_punch,
 })
 
 -- TODO: Register craft for lasso
