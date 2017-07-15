@@ -14,21 +14,21 @@ end
 
 
 -- Lasso
-minetest.register_craftitem(ownmob.modname .. ':lasso', {
+minetest.register_craftitem(ownables.modname .. ':lasso', {
 	description = 'Lasso',
-	inventory_image = 'ownmob_lasso.png',
+	inventory_image = 'ownables_lasso.png',
 	stack_max = 1,
 	on_punch = function(itemstack, placer, pointed_thing)
 		if pointed_thing then
 			-- DEBUG:
-			--ownmob.log('action', 'Lasso pointing at "' .. pointed_thing.name .. '"')
+			--ownables.log('action', 'Lasso pointing at "' .. pointed_thing.name .. '"')
 			
 			if pointed_thing.type == 'object' then
 				-- DEBUG:
-				ownmob.log('action', '\t"' .. pointed_thing.type .. '" is an entity')
+				ownables.log('action', '\t"' .. pointed_thing.type .. '" is an entity')
 			else
 				-- DEBUG:
-				ownmob.log('action', '\t"' .. pointed_thing.type .. '" is not an entity')
+				ownables.log('action', '\t"' .. pointed_thing.type .. '" is not an entity')
 			end
 		end
 	end,

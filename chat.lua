@@ -8,7 +8,7 @@
 --]]
 
 
--- Chat commands for 'ownmob' mod
+-- Chat commands for 'ownables' mod
 
 -- Override 'clearobjects' command
 core.unregister_chatcommand('clearobjects')

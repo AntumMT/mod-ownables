@@ -75,35 +75,35 @@ end
 -- *** GLOBAL FUNCTIONS ***
 
 -- Retrieves table of registered aliases
-function ownmob.get_registered_aliases()
+function ownables.get_registered_aliases()
 	return registered_aliases
 end
 
 
 -- Retrieves table of registered entities
-function ownmob.get_registered_entities()
+function ownables.get_registered_entities()
 	return registered_entities
 end
 
 
 -- Lists registered ownable entities
-function ownmob.list_entities(player)
+function ownables.list_entities(player)
 	if player == nil then
-		ownmob.log('info', 'Ownable entitites (total: ' .. #registered_entities .. '):')
+		ownables.log('info', 'Ownable entitites (total: ' .. #registered_entities .. '):')
 		for i, name in ipairs(registered_entities) do
-			ownmob.log('info', '\t- ' .. name)
+			ownables.log('info', '\t- ' .. name)
 		end
 		
 		return
 	end
 	
 	-- FIXME: Send message to player
-	ownmob.log('warning', 'Called "ownmob.list" with "player" parameter but code is unfinished')
+	ownables.log('warning', 'Called "ownables.list" with "player" parameter but code is unfinished')
 end
 
 
 -- Retrieves entity definition by name
-function ownmob.get_def(name)
+function ownables.get_def(name)
 	local def = nil
 	
 	if contains(registered_entities, name) then
@@ -111,7 +111,7 @@ function ownmob.get_def(name)
 	end
 	
 	if not def then
-		ownmob.log('warning', 'Attempt to retrieve definition for unregistered ownable entity "' .. name .. '"')
+		ownables.log('warning', 'Attempt to retrieve definition for unregistered ownable entity "' .. name .. '"')
 	end
 	
 	return def
@@ -119,8 +119,8 @@ end
 
 
 -- Registers an entity type as an ownable entity
-function ownmob.register(old_name)
-	ownmob.log('debug', 'Registering "' .. old_name .. '" as ownable entity ...')
+function ownables.register(old_name)
+	ownables.log('debug', 'Registering "' .. old_name .. '" as ownable entity ...')
 	
 	local entity_def = minetest.registered_entities[old_name]
 	
@@ -133,9 +133,9 @@ function ownmob.register(old_name)
 		local registered = contains(registered_entities, old_name)
 		
 		if registered then
-			ownmob.log('verbose', 'Registered "' .. old_name .. '" as ownable')
+			ownables.log('verbose', 'Registered "' .. old_name .. '" as ownable')
 		else
-			ownmob.log('error', 'Could not register "' .. old_name .. '" as ownable')
+			ownables.log('error', 'Could not register "' .. old_name .. '" as ownable')
 		end
 		
 		return registered
@@ -151,7 +151,7 @@ end
   @return
     boolean: 'true' if owner was added
 ]]
-function ownmob.add_owner(entity, owner)
+function ownables.add_owner(entity, owner)
 	entity = to_def(entity)
 	if entity and not contains(entity.owner, owner) then
 		table.insert(entity.owner, owner)
@@ -166,7 +166,7 @@ end
 --[[ Removes an owner from entity
   FIXME: Needs to work on entity instances
 ]]
-function ownmob.remove_owner(entity, owner)
+function ownables.remove_owner(entity, owner)
 	entity = to_def(entity)
 	if entity and contains(entity.owner, owner) then
 		table.remove(entity.owner, get_index(entity.owner, owner))
@@ -179,7 +179,7 @@ end
 
 
 -- Checks if entity has owner(s)
-function ownmob.has_owner(entity)
+function ownables.has_owner(entity)
 	if entity and entity.owner ~= nil then
 		if type(entity.owner) == 'string' then return true end
 		if type(entity.owner) == 'table' and #entity.owner then return true end
@@ -190,6 +190,6 @@ end
 
 
 -- Checks if an entity can be player-owned
-function ownmob.is_ownable(name)
+function ownables.is_ownable(name)
 	return contains(registered_entities, name)
 end

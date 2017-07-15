@@ -1,4 +1,4 @@
-# ***Owned Mobile*** (ownmob) mod for [Minetest][]
+# ***Ownable Entities*** (ownables) mod for [Minetest][]
 
 ## *(**this mod is a work-in-progress**)*
 
